@@ -5,7 +5,7 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
-      <th>Actions</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -13,8 +13,19 @@
       <tr>
         <td><%= a.title %></td>
         <td><%= a.description %></td>
-        <td>Placeholder</td>
+        <%# Link to destroy action %>
+        <%# link_to "link_text", article_path(article_id), method: // GET by default %>
+        <td><%= link_to "Show", article_path(a) %></td>
+        <td><%= link_to "Edit", edit_article_path(a), method: :edit %></td>
+        <td><%= link_to "Delete", article_path(a), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<p>
+  <%= link_to "New Article", new_article_path %> |
+  <%= link_to "Home", root_path %>
+</p>
+
+<%# <a href="articles/new">New Article</a> %>
