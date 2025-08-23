@@ -23,9 +23,8 @@
   </head>
 
   <body>
-    <% flash.each do |name, msg| %>
-    <%= msg %>
-    <% end %>
+    <%# Refers to a 'partial'. Notice the lack of '_' %>
+    <%= render "layouts/messages" %>
     <%= yield %>
   </body>
 </html>
