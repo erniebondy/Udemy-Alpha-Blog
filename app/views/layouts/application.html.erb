@@ -23,8 +23,14 @@
   </head>
 
   <body>
+
+    <%= render "layouts/navigation" %>
+
     <%# Refers to a 'partial'. Notice the lack of '_' %>
     <%= render "layouts/messages" %>
+    
     <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
+
 </html>
