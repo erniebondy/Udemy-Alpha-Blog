@@ -1,0 +1,40 @@
+<div class="container">
+
+  <%= render "shared/errors", obj: @user %>
+
+  <%# Forms need a path on submit %>
+  <%# Use (in routes) post "class", to: "class#create" %>
+
+  <%= form_with( model: @user, class: "shadow p-3 mb-3 bg-info-subtle rounded", local: true, data: { turbo: false } ) do |f| %>
+
+    <div class="form-group row">
+      <%= f.label :username, class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= f.text_field :username, class: "form-control shadow", placeholder: "Enter a username" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :email, class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= f.email_field :email, class: "form-control shadow", placeholder: "Enter your email" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :password, class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= f.password_field :password, class: "form-control shadow", placeholder: "Enter your password" %>
+      </div>
+    </div>
+
+    <div class="form-group row m-4 justify-content-center">
+      <%= f.submit class: "btn btn-info col-3 shadow-sm" %>
+    </div>
+
+  <% end %>
+
+  <%= link_to "[ Cancel and return to Article listing ]", articles_path, class: "text-info" %>
+
+  
+</div>

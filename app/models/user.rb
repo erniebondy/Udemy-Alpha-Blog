@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+  ## Downcase email
+  before_save { self.email = email.downcase }
   ## User can have MANY articles <- plural
   has_many :articles
   validates :username, presence: true, uniqueness: { case_sensitive: false },
@@ -7,4 +10,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false },
                     length: { maximum: 105 }, format: { with: VALID_EMAIL_REGEX }
+
+  ## after add bcrypt
+  has_secure_password
 end
