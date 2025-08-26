@@ -1,7 +1,7 @@
-
 ## '<' is to inherit from
 class Article < ApplicationRecord
-  
+  ## Article only has 1 associated user
+  belongs_to :user
   ## Active Record validation
   ## 'presence: true' - Forces the data to be NOT NULL
   ## 'length: {...}'  - Forces min/max string length

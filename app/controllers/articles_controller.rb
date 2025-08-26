@@ -24,6 +24,8 @@ class ArticlesController < ApplicationController
 
     ## Using 'require' and 'permit' are security features
     @article = Article.new(article_params)
+    @article.user = User.first
+    
     if @article.save
       #render plain: @article.inspect
 
