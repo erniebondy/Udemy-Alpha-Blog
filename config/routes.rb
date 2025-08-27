@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   ## post "users", to: "user#create"
 
   ## This creates all the CRUD operations, except new because it has already been defined
-  resources :users, except: [new]
+  resources :users, except: [:new]
   
 end

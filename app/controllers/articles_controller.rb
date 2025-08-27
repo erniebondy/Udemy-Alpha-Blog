@@ -80,6 +80,13 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
+    ## .require is used to check if the top level key is present in params,
+    ## if key is not present .require throws an error
+
+    ## .permit method is used to specify the list of allowed or 
+    ## permitted attributes for a given parameter.Any attributes 
+    ## not explicitly permitted will be filtered out, providing 
+    ## an additional layer of security
     params.require(:article).permit(:title, :description)
   end
 
