@@ -29,7 +29,9 @@
     </div>
 
     <div class="form-group row m-4 justify-content-center">
-      <%= f.submit "Sign up", class: "btn btn-info col-3 shadow-sm" %>
+      <%# Use the .new_record? to check if this a new object %>
+      <%# Don't forget the use of parentheses %>
+      <%= f.submit(@user.new_record? ? "Sign up" : "Update account", class: "btn btn-info col-3 shadow-sm") %>
     </div>
 
   <% end %>
