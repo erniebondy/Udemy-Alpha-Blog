@@ -1,0 +1,36 @@
+<h1 class= "m-4"><%= @user.username %>'s Profile</h1>
+
+<%# gravatar_for is defined in app/helpers/application_helper.rb %>
+<%= gravatar_for @user, size: 200 %>
+
+
+<h3 class= "text-center mt-4">Articles</h3>
+
+<div class="container">
+  
+  <% @articles.each do |art| %>
+    
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow">
+          <div class="card-header fst-italic">
+            <%= art.title %>
+          </div>
+          <div class="card-body">
+            <div class="card-text text-start"><%= simple_format(art.description) %></div>
+            <%= link_to "View", article_path(art), class: "btn btn-primary" %>
+            <%= link_to "Edit", edit_article_path(art), method: :edit, class: "btn btn-info" %>
+            <%= link_to "Delete", article_path(art), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          </div>
+          <div class="card-footer text-body-secondary">
+            <small>
+              Created <%= time_ago_in_words(art.created_at) %> ago, 
+              Edited <%= time_ago_in_words(art.updated_at) %> ago
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <% end %>
+</div>
