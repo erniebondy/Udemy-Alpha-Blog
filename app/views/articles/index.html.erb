@@ -1,5 +1,9 @@
 <h1 class= "m-4">All articles</h1>
 
+<div class="m-4">
+  <%= will_paginate @articless %>
+</div>
+
 <div class="container">
 
   <% @articles.each do |a| %>
@@ -8,7 +12,7 @@
       <div class="col-8 mt-4">
         <div class="card text-center shadow">
           <div class="card-header fst-italic">
-            by <%= a.user.username %>
+            by <%= link_to a.user.username, user_path(a.user) %>
           </div>
 
           <div class="card-body">
@@ -28,5 +32,8 @@
     </div>
 
   <% end %>
+</div>
 
+<div class="m-4">
+  <%= will_paginate @articless %>
 </div>

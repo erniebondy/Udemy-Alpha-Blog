@@ -20,6 +20,9 @@ gem "jbuilder"
 gem "dartsass-rails"
 gem "bootstrap", "~> 5.3.3"
 
+gem 'will_paginate', '3.2.1'
+gem 'will_paginate-bootstrap4'
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
 
