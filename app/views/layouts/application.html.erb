@@ -19,7 +19,10 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "/custom.css" %>
     <%= javascript_importmap_tags %>
+
+    <% puts "----IN HEAD #{(stylesheet_link_tag "")}" %>
   </head>
 
   <body style= "height: 1500px">
@@ -34,3 +37,5 @@
   </body>
 
 </html>
+
+

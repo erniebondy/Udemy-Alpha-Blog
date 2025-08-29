@@ -16,5 +16,13 @@ Rails.application.routes.draw do
 
   ## This creates all the CRUD operations, except new because it has already been defined
   resources :users, except: [:new]
+
+  # .../login
+  get "login", to: "sessions#new"
+
+  # Create request
+  post "login", to: "sessions#create"
+
+  delete "logout", to: "sessions#destroy"
   
 end
