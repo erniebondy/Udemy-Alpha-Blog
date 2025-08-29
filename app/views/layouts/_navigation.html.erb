@@ -5,9 +5,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to "Log In", login_path, class: "nav-link" %>
-        </li>
+        
+        <% if logged_in? %>
+          <li class="nav-item">
+            <%# We call the 'current_user' method because it will either return the
+                '@current_user' or set the '@current_user' and return it %>
+            <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%# Method must be specified. The default method is a 'GET' request %>
+            <%= link_to "Log Out", logout_path, class: "nav-link", data: { turbo_method: :delete } %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Log In", login_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign Up", signup_path, class: "nav-link" %>
+          </li>
+        <% end %>
         <li class="nav-item">
           <%= link_to "Bloggers", users_path, class: "nav-link" %>
         </li>
@@ -21,12 +37,6 @@
             <%# <li><hr class="dropdown-divider"></li> %>
             <%# <li><a class="dropdown-item" href="#">Something else here</a></li> %>
           </ul>
-        </li>
-
-        <li class="nav-item">
-          <%# Method must be specified. The default method is a 'GET' request %>
-          <%= link_to "Log Out", logout_path, class: "nav-link", data: { turbo_method: :delete } %>
-          <%#= link_to "Delete", article_path(a), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         </li>
       </ul>
 
