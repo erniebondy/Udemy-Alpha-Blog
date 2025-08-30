@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :update]
-  before_action :require_user, except: [:show, :index]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:edit, :update]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      ## Also sign in user
+      ## Also log in user
       session[:user_id] = @user.id
       flash[:notice] = "Welcome #{ @user.username }, to the Alpha Blog!"
       redirect_to articles_path
@@ -43,6 +43,13 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page], per_page: 3)
+  end
+
+  def destroy
+    @user.destroy
+    session[:user_id] = nil
+    flash[:notice] = "Account and all associated articles successfully delete"
+    redirect_to root_path
   end
 
   private

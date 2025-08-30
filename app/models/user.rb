@@ -2,8 +2,12 @@ class User < ApplicationRecord
 
   ## Downcase email
   before_save { self.email = email.downcase }
+
   ## User can have MANY articles <- plural
-  has_many :articles
+  ## 'dependent' meaning the articles DEPEND on the user
+  ## If we were to delete the user, it's articles would also be deleted 
+  has_many :articles, dependent: :destroy
+
   validates :username, presence: true, uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 25 }
 
