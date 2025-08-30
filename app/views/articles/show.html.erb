@@ -11,7 +11,7 @@
         <div class="card-body">
           <div class="card-text text-start"><%= simple_format(@article.description) %></div>
           
-          <% if @article.user == current_user %>
+          <% if @article.user == current_user || current_user.admin? %>
             <%= link_to "Edit", edit_article_path(@article), method: :edit, class: "btn btn-info" %>
             <%= link_to "Delete", article_path(@article), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           <% end %>

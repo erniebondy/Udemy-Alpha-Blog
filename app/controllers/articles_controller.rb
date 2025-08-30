@@ -96,7 +96,9 @@ class ArticlesController < ApplicationController
   end
 
   def require_same_user
-    if @article.user != current_user
+    ## 'current_user' is the user logged in
+    ## '@article.user' is the user set by the server
+    if !current_user.admin? && current_user != @article.user
       flash[:alert] = "You can only edit of delete your own article!"
       redirect_to @article #article_path
     end
