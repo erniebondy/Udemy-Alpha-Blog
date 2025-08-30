@@ -3,6 +3,12 @@ class ArticlesController < ApplicationController
   ## Peform this before any methods
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
+  ## Ensure user is logged in
+  before_action :require_user, except: [:show, :index]
+
+  ## Ensure user is current session user
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+  
   def show
     ## 'params' is the data from the URL
     ## '@' denotes an instance variable
@@ -24,7 +30,7 @@ class ArticlesController < ApplicationController
 
     ## Using 'require' and 'permit' are security features
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
     
     if @article.save
       #render plain: @article.inspect
@@ -54,7 +60,6 @@ class ArticlesController < ApplicationController
     # else
     #   render "edit"
     # end
-
   end
 
   def update
@@ -90,5 +95,11 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :description)
   end
 
+  def require_same_user
+    if @article.user != current_user
+      flash[:alert] = "You can only edit of delete your own article!"
+      redirect_to @article #article_path
+    end
+  end
 
 end
