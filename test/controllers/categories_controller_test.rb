@@ -28,6 +28,14 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should not creat category if not admin" do
+    assert_no_difference("Category.count") do
+      post categories_url, params: { category: { name: "Test"} }
+    end
+
+    assert_redirected_to categories_url
+  end
+
   # test "should get edit" do
   #   get edit_category_url(@category)
   #   assert_response :success
