@@ -92,7 +92,8 @@ class ArticlesController < ApplicationController
     ## permitted attributes for a given parameter.Any attributes 
     ## not explicitly permitted will be filtered out, providing 
     ## an additional layer of security
-    params.require(:article).permit(:title, :description)
+    ## Notice the 'category_ids' is an array
+    params.require(:article).permit(:title, :description, category_ids: [])
   end
 
   def require_same_user
