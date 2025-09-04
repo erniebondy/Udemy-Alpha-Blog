@@ -1,1 +1,18 @@
 <h1 class="m-4">Category: <%= @category.name %></h1>
+
+<div class= "text-center mt-4">
+  <% if logged_in? && current_user.admin? %>
+    <%= link_to "Edit category", edit_category_path(@category), class: "btn btn-info" %>
+  <% end %>
+</div>
+
+<div class="m-4">
+  <%# Make sure that the paginated variable is the one that's used in the '.each' block %>
+  <%= will_paginate @category_articles %>
+</div>
+
+<div class="container">
+  <% @category_articles.each do |a| %>
+    <%= render "articles/article", article: a, header: true, trunc_body: true%>
+  <% end %>
+</div>
