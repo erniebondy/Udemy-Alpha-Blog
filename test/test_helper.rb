@@ -11,5 +11,14 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def sign_in_as(user)
+      ## We use a string literal password, because the users password
+      ## would be incripted
+      ## Pass the user username and password because we sign in with username
+      ## and not email
+      post login_path, params: { session: {username: user.username, password: "password"}}
+    end
+
+
   end
 end

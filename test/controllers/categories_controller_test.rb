@@ -3,6 +3,8 @@ require "test_helper"
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @category = Category.create(name: "Sports")
+    @admin_user = User.create(username: "admin_test", email: "test_email@mail.com",
+                              password: "password", admin: true)
   end
 
   test "should get index" do
@@ -11,11 +13,14 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
+    ## We can use this function because it's available in test_helper.rb
+    sign_in_as(@admin_user)
     get new_category_url
     assert_response :success
   end
 
   test "should create category" do
+    sign_in_as(@admin_user)
     assert_difference("Category.count", 1) do
       post categories_url, params: { category: { name: "Test"} }
     end
