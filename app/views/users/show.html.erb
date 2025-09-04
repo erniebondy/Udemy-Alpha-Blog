@@ -16,33 +16,11 @@
 </div>
 
 <div class="container">
-  
   <% @articles.each do |art| %>
-    
-    <div class="row justify-content-md-center">
-      <div class="col-8 mt-4">
-        <div class="card text-center shadow">
-          <div class="card-header fst-italic">
-            <%= art.title %>
-          </div>
-          <div class="card-body">
-            <div class="card-text text-start"><%= simple_format(art.description) %></div>
-            <%= link_to "View", article_path(art), class: "btn btn-primary" %>
-            <% if @user == current_user %>
-              <%= link_to "Edit", edit_article_path(art), method: :edit, class: "btn btn-info" %>
-              <%= link_to "Delete", article_path(art), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-            <% end %>
-          </div>
-          <div class="card-footer text-body-secondary">
-            <small>
-              Created <%= time_ago_in_words(art.created_at) %> ago, 
-              Edited <%= time_ago_in_words(art.updated_at) %> ago
-            </small>
-          </div>
-        </div>
-      </div>
-    </div>
-  
+    <%= render "articles/article", article: art, header: false, trunc_body: false %>
   <% end %>
 </div>
 
+<div class="m-4">
+  <%= will_paginate @articles %>
+</div>

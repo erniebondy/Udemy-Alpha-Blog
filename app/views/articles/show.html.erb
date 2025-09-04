@@ -1,27 +1,5 @@
 <h2 class= "m-4"><%= @article.title %></h1>
 
 <div class="container">
-  
-  <div class="row justify-content-md-center">
-    <div class="col-8 mt-4">
-      <div class="card text-center shadow">
-        <div class="card-header fst-italic">
-          by <%= link_to @article.user.username, user_path(@article.user) %>
-        </div>
-        <div class="card-body">
-          <div class="card-text text-start"><%= simple_format(@article.description) %></div>
-          
-          <% if @article.user == current_user || (logged_in? && current_user.admin?) %>
-            <%= link_to "Edit", edit_article_path(@article), method: :edit, class: "btn btn-info" %>
-            <%= link_to "Delete", article_path(@article), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-          <% end %>
-        </div>
-        <div class="card-footer text-body-secondary">
-          <small>Created <%= time_ago_in_words(@article.created_at) %> ago, 
-          Edited <%= time_ago_in_words(@article.updated_at) %> ago</small>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+  <%= render "article", article: @article, header: false, trunc_body: false %>
 </div>
