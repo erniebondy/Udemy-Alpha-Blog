@@ -26,9 +26,11 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    ## edit shows the view
   end
 
   def update
+    ## update handles the edit
     if @category.update(category_params)
       flash[:notice] = "Category was updated!"
       redirect_to categories_path
